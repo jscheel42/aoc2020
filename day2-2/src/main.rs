@@ -15,22 +15,14 @@ fn main() {
         let idx_1: usize = count_iter.next().unwrap().parse::<usize>().unwrap() - 1;
         let idx_2: usize = count_iter.next().unwrap().parse::<usize>().unwrap() - 1;
 
-        let target_char: String = iter.next().unwrap().to_string().replace(":", "");
+        let target_char: char = iter.next().unwrap().to_string().replace(":", "").chars().nth(0).unwrap();
 
         let password: String = iter.next().unwrap().to_string();
 
         // Compare the password to the criteria        
-        let mut match_count = 0;
-        if password.chars().nth(idx_1).unwrap().to_string() == target_char {
-            match_count += 1;
-        }
-        if password.chars().nth(idx_2).unwrap().to_string() == target_char {
-            match_count += 1;
-        }
-        if match_count == 1 {
+        if (password.chars().nth(idx_1).unwrap() == target_char) != (password.chars().nth(idx_2).unwrap() == target_char) {
             correct_password_count += 1;
         }
-
     }
     println!("{}", correct_password_count);
 }
